@@ -18,4 +18,4 @@ get_raw_responses <- function(n) {
 }
 
 responses <- future_map(1:20, \(x) get_raw_responses(100), .progress = TRUE)
-jsonlite::write_json(responses, "terrorist_character/data/raw_data.json")
+jsonlite::write_json(responses, "terrorist_character/data/raw_data.json", pretty = TRUE)
