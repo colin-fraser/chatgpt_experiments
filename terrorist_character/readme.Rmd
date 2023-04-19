@@ -44,10 +44,12 @@ head(result_df)
 Just to get an idea of what we're working with.
 
 ```{r}
+library(gt)
 result_df |> 
   filter(response == 1) |> 
   select(name:description) |> 
-  gt::gt()
+  gt() |> 
+  as_raw_html()
 ```
 
 
@@ -157,7 +159,6 @@ result_df |>
 ChatGPT suggests very different occupations for the male and female characters.
 
 ```{r}
-library(gt)
 result_df |>
   count(occupation_cleaned, gender_cleaned, sort = TRUE) |>
   group_by(gender_cleaned) |>
@@ -178,6 +179,7 @@ result_df |>
              freq_Female = '%') |>
   fmt_percent(c(contains("freq")), decimals = 1) |>
   tab_header("Top 10 occupations for suggested terrorist characters",
-             "Out of 5,988 suggestions from gpt-3.5-turbo.")
+             "Out of 5,988 suggestions from gpt-3.5-turbo.") |> 
+  as_raw_html()
 ```
 
