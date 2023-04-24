@@ -1,0 +1,65 @@
+library(gt)
+library(tidyverse)
+source("../functions.R")
+
+prompts <- c("What is a synonym for 'goal' that starts with 'c'? Format your final answer as follows: 'Answer: [word]'.",
+             "You are a linguistics expert and a brilliant trivia game player. What is a synonym for 'goal' that starts with 'c'? Format your final answer as follows: 'Answer: [word]'.",
+             "What is a synonym for 'goal' that starts with 'c'? To solve the problem, I want you to use the following procudure. Repeat it as many times as necessary. Pick a word. Check to see if it starts with 'c', If it does start with 'c' then report it as your answer. If it doesn't then try to pick a new word and repeat the procedure. Format your final answer as follows: 'Answer: [word]'.")
+
+if (!fs::file_exists("data/responses.RDS")) {
+  df <- send_prompts(prompts, n = 100, temperature = 1)
+  saveRDS(df, "data/responses.RDS")
+} else {
+  df <- readRDS("data/responses.RDS")
+}
+
+df_expanded <- df |>
+  unnest(messages) |>
+  mutate(messages = fct_recode(str_to_lower(str_extract(messages, "(?i)(?<=answer: )\\w+|sorry,")), "Sorry, as an AI Language Model..." = "sorry,")) |>
+  mutate(messages = fct_explicit_na(messages, '(unparseable)')) |>
+  mutate(prompt = fct(prompt, prompts))
+
+
+df_expanded |>
+  count(prompt, messages) |>
+  arrange(prompt, desc(n)) |>
+  group_by(prompt) |>
+  gt() |>
+  cols_label(messages = "Parsed Response", n = "Count") |>
+  tab_header("100 responses to prompts asking for a synonym for 'goal' that starts with 'c'. (Parsed responses)",
+             "Comparison of different prompt engineering tricks for improving performance. Model = gpt-3.5-turbo, temperature = 1.") |>
+  tab_style(cell_text(style = 'italic'), cells_row_groups()) |>
+  cols_align('right') |>
+  opt_align_table_header("left")
+
+df_expanded |>
+  mutate(response = fct_relevel(fct_relabel(messages,
+                     \(x) case_when(str_starts(x, '(?i)^c') ~ 'Starts with C',
+                                    str_starts(x, 'Sorry') ~ 'Sorry, as an AI Language Model...',
+                                    x == '(unparseable)' ~ x,
+                                    TRUE ~ 'Starts with other letter'
+                     )), "Starts with C")) |>
+  count(prompt, response) |>
+  group_by(prompt) |>
+  gt() |>
+  cols_label(response = "Response Type", n = "Count") |>
+  tab_header("100 responses to prompts asking for a synonym for 'goal' that starts with 'c'. (Summary)",
+             "Comparison of different prompt engineering tricks for improving performance. Model = gpt-3.5-turbo, temperature = 1.") |>
+  tab_style(cell_text(style = 'italic'), cells_row_groups()) |>
+  cols_align('right') |>
+  opt_align_table_header("left")
+
+df |>
+  unnest(messages) |>
+  count(prompt = fct(prompt, prompts), messages = str_c('"', messages, '"'), sort = TRUE) |>
+  group_by(prompt) |>
+  gt() |>
+  cols_label(messages = "Raw Response", n = "Count") |>
+  tab_header("100 responses to prompts asking for a synonym for 'goal' that starts with 'c' (Raw responses).",
+             "Comparison of different prompt engineering tricks for improving performance. Model = gpt-3.5-turbo, temperature = 1.") |>
+  tab_style(cell_text(style = 'italic'), cells_row_groups()) |>
+  cols_align('right') |>
+  opt_align_table_header("left") |>
+  tab_style(cell_text(font = 'courier'), locations = cells_body(columns = messages)) |>
+  tab_style(cell_text(size = 'small', stretch = 'condensed'), locations = cells_body()) |>
+  tab_options(data_row.padding = px(1))
