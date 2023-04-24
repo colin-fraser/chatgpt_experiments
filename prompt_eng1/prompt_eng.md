@@ -62,7 +62,7 @@ df_expanded |>
   as_raw_html()
 ```
 
-<div id="srupqujapp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oovbduxiky" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead class="gt_header">
@@ -157,7 +157,7 @@ df_expanded |>
   as_raw_html()
 ```
 
-<div id="enfuahvlkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xicqnbwclb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead class="gt_header">
@@ -226,7 +226,7 @@ df |>
   as_raw_html()
 ```
 
-<div id="kktaifxkge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pctqckhirc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif; display: table; border-collapse: collapse; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead class="gt_header">
@@ -429,3 +429,41 @@ Answer: Any of the words above that start with 'c'."</td>
   
 </table>
 </div>
+
+``` r
+if (!fs::file_exists("data/responses4.RDS")) {
+  df4 <- send_prompts(prompts, n = 100, temperature = 1, model = 'gpt-4', .api_key = getPass::getPass("API key"))
+  saveRDS(df, "data/responses4.RDS")
+} else {
+  df4 <- readRDS("data/responses4.RDS")
+}
+```
+
+``` r
+df$model <- 'gpt-3.5-turbo'
+df4 |>
+  bind_rows(df) |> 
+  unnest(messages) |>
+  mutate(messages = str_to_lower(str_extract(messages, "(?i)(?<=answer: )\\w+"))) |> 
+  count(model, prompt =fct(prompt, prompts), starts_with_c = str_starts(messages, "(?i)c")) |> 
+  filter(starts_with_c) |> 
+  mutate(prompt_no = as.integer(prompt)) |> 
+  ggplot(aes(x = prompt_no, y = n, fill = model)) + 
+  geom_col(position = position_dodge()) +
+  labs(title = 'Asking GPT for words starting with \'c\'', 
+       y = '% of responses staring with \'c\'', x = 'Prompt',
+       fill = 'Model', caption = str_c(1:3, str_wrap(prompts, 100), sep = ', ', collapse = '\n')) +
+  colinlib::theme1() +
+  theme(plot.caption = element_text(hjust = 0))
+```
+
+![](prompt_eng_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+df4 |>
+  bind_rows(df) |> 
+  unnest(messages) |> 
+  transmute(model, prompt, raw_response = messages, parsed_response = str_extract(messages, r"((?i)(?<=Answer: ['"]?)\w+)"),
+            temperature) |> 
+  write_csv("data/flat_responses.csv")
+```
