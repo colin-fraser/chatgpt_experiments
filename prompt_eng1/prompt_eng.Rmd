@@ -39,7 +39,8 @@ df_expanded |>
              "Comparison of different prompt engineering tricks for improving performance. Model = gpt-3.5-turbo, temperature = 1.") |>
   tab_style(cell_text(style = 'italic'), cells_row_groups()) |>
   cols_align('right') |>
-  opt_align_table_header("left")
+  opt_align_table_header("left") |> 
+  as_raw_html()
 
 df_expanded |>
   mutate(response = fct_relevel(fct_relabel(messages,
@@ -56,7 +57,8 @@ df_expanded |>
              "Comparison of different prompt engineering tricks for improving performance. Model = gpt-3.5-turbo, temperature = 1.") |>
   tab_style(cell_text(style = 'italic'), cells_row_groups()) |>
   cols_align('right') |>
-  opt_align_table_header("left")
+  opt_align_table_header("left") |> 
+  as_raw_html()
 
 df |>
   unnest(messages) |>
@@ -71,6 +73,7 @@ df |>
   opt_align_table_header("left") |>
   tab_style(cell_text(font = 'courier'), locations = cells_body(columns = messages)) |>
   tab_style(cell_text(size = 'small', stretch = 'condensed'), locations = cells_body()) |>
-  tab_options(data_row.padding = px(1))
+  tab_options(data_row.padding = px(1)) |> 
+  as_raw_html()
 ```
 
