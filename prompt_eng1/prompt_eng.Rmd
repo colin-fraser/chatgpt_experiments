@@ -1,3 +1,12 @@
+---
+title: prompt_eng.R
+author: colinfraser
+date: '2023-04-24'
+output: github_document
+---
+
+
+```{r }
 library(gt)
 library(tidyverse)
 source("../functions.R")
@@ -63,3 +72,5 @@ df |>
   tab_style(cell_text(font = 'courier'), locations = cells_body(columns = messages)) |>
   tab_style(cell_text(size = 'small', stretch = 'condensed'), locations = cells_body()) |>
   tab_options(data_row.padding = px(1))
+```
+

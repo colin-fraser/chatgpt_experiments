@@ -12,3 +12,4 @@ send_prompts <- function(prompts, ..., .additional_cols = NULL) {
 parse_message <- function(cr) {
   map_chr(cr$choices, c("message", "content"))
 }
+
