@@ -44,8 +44,8 @@ responses <- params |>
 ```{r}
 params |> 
   mutate(response = map_chr(responses, parse_message)) |> 
-  select(theorem, prompt, correct, temperature, response) |> 
-  group_by(theorem, prompt, correct) |> 
+  select(theorem, proof, correct, temperature, response) |> 
+  group_by(theorem, proof, correct) |> 
   gt::gt() |> 
   gt::as_raw_html()
 ```
