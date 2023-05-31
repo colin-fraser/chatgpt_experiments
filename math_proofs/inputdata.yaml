@@ -11,7 +11,7 @@
   correct: false
   proof: Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational
 - theorem: There are infinitely many prime numbers.
-  correct: false
+  correct: true
   proof: Suppose there are N prime numbers P = {p1, p2, ..., pN} and consider the number M = p1p2...pN. Factor M into two divisors n and m with n + m > 2. Since each prime number divides exactly one of n or m, no prime number divides their sum n + m. Hence n + m has a prime factor not in P. This contradicts the original assumption of finitely many primes, and hence there are infinitely many prime numbers.
 - theorem: There are infinitely many prime numbers.
   correct: false
