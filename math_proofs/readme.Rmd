@@ -2,7 +2,7 @@
 title: "Math Proofs"
 author: "Colin Fraser"
 date: "2023-05-31"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -46,7 +46,8 @@ params |>
   mutate(response = map_chr(responses, parse_message)) |> 
   select(theorem, prompt, correct, temperature, response) |> 
   group_by(theorem, prompt, correct) |> 
-  gt::gt()
+  gt::gt() |> 
+  gt::as_raw_html()
 ```
 
 Find the response data in responses.csv.
