@@ -6,7 +6,7 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(openaiwrapper)
 library(furrr)
@@ -14,6 +14,8 @@ source("../functions.R")
 ```
 
 ## Asking GPT to critique mathematical proofs
+
+Just asked for a single response at each temperature for each proof. 
 
 ```{r}
 proofs <- yaml::read_yaml("inputdata.yaml") |> 
@@ -44,7 +46,7 @@ responses <- params |>
 ```{r}
 params |> 
   mutate(response = map_chr(responses, parse_message)) |> 
-  transmute(theorem, proof, correct, temperature, str_trunc(response, 1000, ellipsis = "[...]")) |> 
+  transmute(theorem, proof, correct = ifelse(correct, "(Correct proof)", "(Incorrect proof)"), temperature, response = str_trunc(response, 1000, ellipsis = "[truncated ...]")) |> 
   group_by(theorem, proof, correct) |> 
   gt::gt() |> 
   gt::as_raw_html()

@@ -1,37 +1,35 @@
 theorem,correct,proof,prompt,temperature,response
-The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational","Is the following proof correct?
+The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.","Is the following proof correct?
 
 Theorem. The square root of 2 is irrational.
 
-Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational",0,".
-
-Yes, the proof is correct. It uses proof by contradiction to show that the assumption that √2 can be written as a ratio of two coprime integers leads to a contradiction, and therefore √2 must be irrational."
-The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational","Is the following proof correct?
+Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.",0,"Yes, the proof is correct. It uses a proof by contradiction to show that the assumption that √2 can be written as a ratio of two coprime integers leads to a contradiction, and therefore √2 must be irrational."
+The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.","Is the following proof correct?
 
 Theorem. The square root of 2 is irrational.
 
-Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational",0.5,".
-
-Yes, the proof is correct."
-The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational","Is the following proof correct?
+Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.",0.5,"Yes, the proof is correct. It uses a proof by contradiction to show that assuming √2 can be written as a ratio of two coprime integers leads to a contradiction, and therefore √2 must be irrational."
+The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.","Is the following proof correct?
 
 Theorem. The square root of 2 is irrational.
 
-Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational",1,".
-
-Yes, the proof is correct. It uses proof by contradiction to show that the assumption that the square root of 2 can be written as a ratio of two coprime integers leads to a contradiction, which means that the assumption must be false and the square root of 2 is irrational."
-The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational","Is the following proof correct?
+Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.",1,"Yes, the proof is correct. It uses a proof by contradiction to show that assuming the square root of 2 can be written as a ratio of two coprime integers leads to a contradiction. Specifically, it shows that such an assumption leads to a contradiction with the fact that a is odd and 2b is even, which implies that a must be even, contradicting the initial assumption that a is odd. Therefore, we must conclude that the square root of 2 is irrational."
+The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.","Is the following proof correct?
 
 Theorem. The square root of 2 is irrational.
 
-Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational",1.5,".
+Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.",1.5,"Yes, the proof is correct. We can rephrase it slightly to make the reasoning more explicit:
 
-Yes, the proof is correct. It shows that the assumption that sqrt(2) can be written as a ratio of two coprime integers leads to a contradiction, thus proving that sqrt(2) is irrational."
-The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational","Is the following proof correct?
+Suppose by way of contradiction that the square root of 2 is rational, so that we can write √2 = a/b where a and b are coprime integers. Then, squaring both sides yields 2 = a^2/b^2, which means that a^2 = 2b^2. 
+
+Since every square is either 0 or 1 modulo 4 (in particular, it can not be 2 modulo 4), this implies that whatever a is (odd or even), 4 divides a^2, which means that 2 divides a. Consequently, we can we can write a=2c for some integer c, so that (2c)^2= 2b^2.This shows that 2 and hence b^2 are divisible by 2, so b is even. 
+
+We have shown that if √2 is rational, then there exist coprime integers a and b such that a is even and b is also even, contradicting the assumption that a and b are coprime. Thus, our assumption is false, and √2 must be irrational."
+The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.","Is the following proof correct?
 
 Theorem. The square root of 2 is irrational.
 
-Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational",2,"Yes, this is a correct proof that ""The square root of 2 is irrational."""
+Proof. Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational.",2,"Yes, the proof is correct."
 The square root of 2 is irrational.,FALSE,"Suppose we can write √2 = a/b as a ratio of two coprime integers, so that a^2 = 2b^2. Consider the final decimal digits of a^2 and 2b^2. Since a^2 is a square, its final decimal digit must be one of 1 or 6. Since 2b^2 is twice a square, its final decimal digit must be 2. And since a^2 and 2b^2 are equal, they must have the same final decimal digit, and hence 2 (the only digit that appears as a candidate for both numbers). This imples that a^2 and b^2 are both divisible by 2, which contradicts the assumption that a/b was in lowest terms. Hence, the square root of 2 must be irrational.","Is the following proof correct?
 
 Theorem. The square root of 2 is irrational.
