@@ -95,13 +95,15 @@ df4 |>
   count(model, prompt =fct(prompt, prompts), starts_with_c = str_starts(messages, "(?i)c")) |> 
   filter(starts_with_c) |> 
   mutate(prompt_no = as.integer(prompt)) |> 
-  ggplot(aes(x = prompt_no, y = n, fill = model)) + 
-  geom_col(position = position_dodge()) +
+  ggplot(aes(x = prompt_no, y = n/100, fill = model)) + 
+  geom_col(position = position_dodge(width = .5), width = .5) +
   labs(title = 'Asking GPT for words starting with \'c\'', 
        y = '% of responses staring with \'c\'', x = 'Prompt',
        fill = 'Model', caption = str_c(1:3, str_wrap(prompts, 100), sep = ', ', collapse = '\n')) +
   colinlib::theme1() +
-  theme(plot.caption = element_text(hjust = 0))
+  theme(plot.caption = element_text(hjust = 0)) +
+  geom_text(aes(label = scales::percent(n/100)), position = position_dodge(, width = .5),
+            vjust = -.1, hjust = .5, size = 3)
   
 
 ```

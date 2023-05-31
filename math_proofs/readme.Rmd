@@ -1,0 +1,59 @@
+---
+title: "Math Proofs"
+author: "Colin Fraser"
+date: "2023-05-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(openaiwrapper)
+library(furrr)
+source("../functions.R")
+```
+
+## Asking GPT to critique mathematical proofs
+
+```{r}
+proofs <- yaml::read_yaml("inputdata.yaml") |> 
+  map(as_tibble) |> 
+  list_rbind() |> 
+  mutate(prompt = str_glue("Is the following proof correct?\n\nTheorem. {theorem}\n\nProof. {proof}"))
+
+future::plan(multisession)
+quick_chat_completion <- memoise::memoise(
+  function(user_message, system_message = NULL, ..., .verbose = TRUE, .sleep = 2) {
+    args <- c(as.list(environment()), list(...))
+    if (.verbose) message(paste("qcc called with params:\n\n", paste(args, collapse = ','))) 
+    Sys.sleep(.sleep)
+    openaiwrapper::quick_chat_completion(user_message, system_message, ...)
+  }, cache = cachem::cache_disk("cache")
+)
+params <- proofs |> 
+  crossing(temperature = c(0, .5, 1, 1.5, 2))
+
+responses <- params |> 
+  as.list() |> 
+  pmap(\(prompt, temperature, ...) quick_chat_completion(prompt, temperature = temperature, .verbose = FALSE), 
+              .progress = TRUE)
+```
+
+
+
+```{r}
+params |> 
+  mutate(response = map_chr(responses, parse_message)) |> 
+  select(theorem, prompt, correct, temperature, response) |> 
+  group_by(theorem, prompt, correct) |> 
+  gt::gt()
+```
+
+Find the response data in responses.csv.
+
+```{r}
+params |> 
+  mutate(response = map_chr(responses, parse_message)) |> 
+  write_csv("responses.csv")
+```
+

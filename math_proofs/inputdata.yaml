@@ -1,0 +1,18 @@
+- theorem: The square root of 2 is irrational.
+  correct: true
+  proof: Suppose that √2 = a/b with a and b positive integers. Consider the set A of positive integers m such that m√2 is an integer. A is nonempty because b is in A, and hence by the well-ordering principle, A has a smallest element s. Now consider the integer r = s√2 - s. Since r√2 = (s√2 - s)√2 = 2s - s√2 is an integer, r must be in A—but since r = s(√2 - 1) < s, r is smaller than the least element in A. This is a contradiction, and hence √2 must be irrational.
+- theorem: The square root of 2 is irrational.
+  correct: true
+  proof: Suppose we can write √2 = a/b as a ratio of two coprime integers, so that a^2 = 2b^2. Consider the final decimal digits of a^2 and 2b^2. Since a^2 is a square, its final decimal digit must be one of 0, 1, 4, 5, 6, or 9. Since 2b^2 is twice a square, its final decimal digit must be 0, 2, or 8. And since a^2 and 2b^2 are equal, they must have the same final decimal digit, and hence 0 (the only digit that appears as a candidate for both numbers). This imples that a^2 and b^2 are both divisible by 10, which contradicts the assumption that a/b was in lowest terms. Hence, the square root of 2 must be irrational.
+- theorem: The square root of 2 is irrational.
+  correct: false
+  proof: Suppose we can write √2 = a/b as a ratio of two coprime integers, so that a^2 = 2b^2. Consider the final decimal digits of a^2 and 2b^2. Since a^2 is a square, its final decimal digit must be one of 1 or 6. Since 2b^2 is twice a square, its final decimal digit must be 2. And since a^2 and 2b^2 are equal, they must have the same final decimal digit, and hence 2 (the only digit that appears as a candidate for both numbers). This imples that a^2 and b^2 are both divisible by 2, which contradicts the assumption that a/b was in lowest terms. Hence, the square root of 2 must be irrational.
+- theorem: The square root of 2 is irrational.
+  correct: false
+  proof: Suppose we can write √2 = a/b as a ratio of two coprime integers a and b. Then we must have a = 2b where a is odd and b is even. But since a = 2b then a must be even, contradicting the assumption that a was odd. Hence, the square root of 2 is irrational
+- theorem: There are infinitely many prime numbers.
+  correct: false
+  proof: Suppose there are N prime numbers P = {p1, p2, ..., pN} and consider the number M = p1p2...pN. Factor M into two divisors n and m with n + m > 2. Since each prime number divides exactly one of n or m, no prime number divides their sum n + m. Hence n + m has a prime factor not in P. This contradicts the original assumption of finitely many primes, and hence there are infinitely many prime numbers.
+- theorem: There are infinitely many prime numbers.
+  correct: false
+  proof: Suppose that there are N prime numbers S = {p1, p2, ..., pN}. Consider the number M = p1p2...pN + 1. No number in S can divide M, so M must itself be prime. Hence we have found a prime not originally in S, contradicting the original assumption. We can conclude that there are infinitely many prime numbers.
